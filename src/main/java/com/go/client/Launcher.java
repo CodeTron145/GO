@@ -1,17 +1,16 @@
 package com.go.client;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Launcher {
 
-    public Launcher () throws IOException {
+    public Launcher () {
 
         int size = 5;
         int mode = 0;
         Scanner scan = new Scanner(System.in);
         boolean activ = true;
-        int inputInt = -1;
+        int inputInt;
 
         while (activ) {
 
