@@ -56,8 +56,7 @@ public class Launcher {
                     }
                     break;
                 case 3:
-                    Gui gui = new Gui();
-                    gui.setVisible(true);
+                    Gui gui = new Gui(size);
                     break;
                 case 4:
 

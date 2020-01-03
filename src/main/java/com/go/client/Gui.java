@@ -6,11 +6,16 @@ import javax.swing.*;
 
 public class Gui extends JFrame {
 
-    public Gui () {
+    public Gui (int size) {
 
         super("Go");
-        this.setBounds(100,100,250,100);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int sizeGlob = size * 100;
+        int locationX = (screenSize.width - sizeGlob) / 2;
+        int locationY = (screenSize.height - sizeGlob) / 2;
+        this.setBounds(locationX, locationY, sizeGlob, sizeGlob);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
 
 
     }
