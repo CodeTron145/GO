@@ -10,7 +10,7 @@ public class Gui extends JFrame {
 
         super("Go");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int sizeGlob = size * 100;
+        int sizeGlob = size;
         int locationX = (screenSize.width - sizeGlob) / 2;
         int locationY = (screenSize.height - sizeGlob) / 2;
         this.setBounds(locationX, locationY, sizeGlob, sizeGlob);
