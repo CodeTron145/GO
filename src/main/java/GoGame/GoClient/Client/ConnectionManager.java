@@ -1,6 +1,29 @@
 package GoGame.GoClient.Client;
 
-public interface ConnectionManager {
+import java.io.IOException;
+import java.net.Socket;
 
-    void receive(Message message);
+public class ConnectionManager implements IConnectionManager {
+
+    ConnectionManager (Socket socket) {
+
+
+    }
+
+
+    @Override
+    public void disconnect() throws IOException {
+
+
+    }
+
+    @Override
+    public void sendMessage(Message message) {
+
+    }
+
+    @Override
+    public void startListening(IMessageReceiver receiver) {
+
+    }
 }

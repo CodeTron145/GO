@@ -5,14 +5,17 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client {
+public class Client implements IMessageReceiver {
+
+    private IConnectionManager connectionManager = null;
+    private IMessageReceiver messageReceiver = null;
 
     public void connect (String host, int port) {
 
         try {
             Socket clientSocket = new Socket(host, port);
-            //connectionManager = new TcpConnectionManager(clientSocket);
-            //connectionManager.startListening(this);
+            connectionManager = new ConnectionManager(clientSocket);
+            connectionManager.startListening(this);
         } catch (UnknownHostException ex) {
             JOptionPane.showMessageDialog(null, "Error connecting to a server! Unknown host!");
         } catch (IOException e) {
@@ -20,8 +23,13 @@ public class Client {
         }
     }
 
-    public void disconnect(){
+    public void disconnect() {
 
-        //connectionManager = null;
+        connectionManager = null;
+    }
+
+    @Override
+    public void receive(Message message) {
+
     }
 }

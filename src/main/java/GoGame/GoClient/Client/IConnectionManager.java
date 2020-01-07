@@ -2,9 +2,9 @@ package GoGame.GoClient.Client;
 
 import java.io.IOException;
 
-public interface MessageReceiver {
+public interface IConnectionManager {
 
     void disconnect() throws IOException;
     void sendMessage(Message message);
-    void startListening(MessageReceiver receiver);
+    void startListening(IMessageReceiver receiver);
 }
