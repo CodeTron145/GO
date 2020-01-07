@@ -28,8 +28,30 @@ public class Client implements IMessageReceiver {
         connectionManager = null;
     }
 
+    public void setMessageReceiver(IMessageReceiver messageReceiver){
+
+        this.messageReceiver = messageReceiver;
+    }
+
+    public synchronized void sendMessage(Message message){
+
+        connectionManager.sendMessage(message);
+    }
+
     @Override
     public void receive(Message message) {
 
+        if(message == null){
+            try {
+                connectionManager.disconnect();
+                connectionManager = null;
+                messageReceiver.receive(new Message("showlogin", ""));
+            } catch (IOException e) {
+                System.out.println("Error closing the socket");
+            }
+        }
+        else if(messageReceiver != null){
+            messageReceiver.receive(message);
+        }
     }
 }

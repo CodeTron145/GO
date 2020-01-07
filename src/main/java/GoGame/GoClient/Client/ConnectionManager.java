@@ -10,7 +10,6 @@ public class ConnectionManager implements IConnectionManager {
 
     }
 
-
     @Override
     public void disconnect() throws IOException {
 
