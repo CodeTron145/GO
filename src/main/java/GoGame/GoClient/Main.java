@@ -1,4 +1,4 @@
-package GoGame.GoClient.GUI;
+package GoGame.GoClient;
 
 import GoGame.GoClient.GuiManager;
 
