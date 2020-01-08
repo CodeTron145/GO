@@ -50,7 +50,7 @@ public class GuiManager implements IMessageReceiver {
         if(message == null){
             client.disconnect();
             showLoginWindow();
-            JOptionPane.showMessageDialog(viewFrameReceiver, "Connection to the server lost!");
+            //JOptionPane.showMessageDialog(viewFrameReceiver, "Connection to the server lost!");
             return;
         }
 
@@ -63,10 +63,10 @@ public class GuiManager implements IMessageReceiver {
         else if(message.getHeader().equals("showlogin")){
             showLoginWindow();
         }
-        else if(message.getHeader().toLowerCase().equals("info") ||
-                message.getHeader().toLowerCase().equals("invalidmoveinfo") ){
-            JOptionPane.showMessageDialog(viewFrameReceiver, message.getValue());
-        }
+//        else if(message.getHeader().toLowerCase().equals("info") ||
+//                message.getHeader().toLowerCase().equals("invalidmoveinfo") ){
+//            JOptionPane.showMessageDialog(viewFrameReceiver, message.getValue());
+//        }
         else{
             viewFrameReceiver.receive(message);
         }
