@@ -4,6 +4,8 @@ import GoGame.GoClient.Client.Client;
 import GoGame.GoClient.Client.IMessageReceiver;
 import GoGame.GoClient.Client.Message;
 import GoGame.GoClient.GUI.Board;
+import GoGame.GoClient.GUI.Lobby;
+import GoGame.GoClient.GUI.LoginWindow;
 import GoGame.GoClient.GUI.ReceiverFrame;
 
 import javax.swing.*;
@@ -27,9 +29,21 @@ public class GuiManager implements IMessageReceiver {
         viewFrameReceiver = new Board(this);
     }
 
-    private void showLoginWindow() {}
+    private void showLoginWindow() {
 
-    private void showLobby(){}
+        if(viewFrameReceiver != null){
+            viewFrameReceiver.dispose();
+        }
+        viewFrameReceiver = new LoginWindow(this);
+    }
+
+    private void showLobby(){
+
+        if(viewFrameReceiver != null){
+            viewFrameReceiver.dispose();
+        }
+        viewFrameReceiver = new Lobby(this);
+    }
 
     @Override
     public void receive(Message message) {
