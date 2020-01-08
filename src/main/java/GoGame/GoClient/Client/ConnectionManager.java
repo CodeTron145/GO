@@ -78,7 +78,7 @@ public class ConnectionManager implements IConnectionManager {
     @Override
     public void startListening(IMessageReceiver receiver) {
 
-        Listener tcpListener = new Listener(receiver);
-        tcpListener.start();
+        Listener listener = new Listener(receiver);
+        listener.start();
     }
 }

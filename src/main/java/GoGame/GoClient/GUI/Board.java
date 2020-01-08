@@ -9,7 +9,12 @@ import java.util.Iterator;
 
 public class Board extends ReceiverFrame{
 
+    private final BoardPanel boardPanel = new BoardPanel(this);
+    private final GuiManager guiManager;
+
     public Board (GuiManager guiManager) {
+
+        this.guiManager = guiManager;
 
         setSize(800,900);
         setLayout(new BorderLayout());
@@ -19,7 +24,22 @@ public class Board extends ReceiverFrame{
         setLocationRelativeTo(null);
         setTitle("Go Board");
 
+        JPanel scorePanel = new JPanel();
 
+        JLabel playerScore = new JLabel("Your Score: 0",SwingConstants.CENTER);
+        JLabel opponentScore = new JLabel("Opponent's Score: 0",SwingConstants.CENTER);
+        playerScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
+        opponentScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
+
+        scorePanel.setLayout(new GridLayout(1,2));
+        scorePanel.add(playerScore);
+        scorePanel.add(opponentScore);
+
+        JPanel buttonPanel = new JPanel();
+
+        add(scorePanel,BorderLayout.NORTH);
+        add(boardPanel,BorderLayout.CENTER);
+        add(buttonPanel,BorderLayout.SOUTH);
     }
 
     private synchronized void setBlackPawn(int x, int y){
