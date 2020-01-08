@@ -14,7 +14,7 @@ public class LoginWindow extends ReceiverFrame {
     public LoginWindow (GuiManager guiManager) {
 
         setSize(300,300);
-        setBackground(Color.BLUE);
+        getContentPane().setBackground(Color.GREEN);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
