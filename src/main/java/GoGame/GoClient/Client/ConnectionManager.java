@@ -12,7 +12,6 @@ public class ConnectionManager implements IConnectionManager {
 
     ConnectionManager (Socket socket) {
 
-
         this.socket = socket;
         try {
             bufferedReader = new BufferedReader( new InputStreamReader( socket.getInputStream()) );
