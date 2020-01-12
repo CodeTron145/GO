@@ -1,6 +1,6 @@
 package GoGame.GoServer;
 
-import GoGame.GoServer.Server.Connection;
+import GoGame.GoServer.Server.ConnectionFactory;
 import GoGame.GoServer.Server.Greeter;
 
 import java.io.IOException;
@@ -8,20 +8,20 @@ import java.util.Scanner;
 
 class Main {
     public static void main(String[] args){
+        System.out.println("Starting server...\n");
 
-        System.out.println("Start of server!");
         Greeter connectionGreeter = null;
-        System.out.println("Connection with greeter...");
         try {
-            connectionGreeter = new Greeter(new Connection(6666));
+            System.out.println("Creating conneciton greeter");
+            connectionGreeter = new Greeter(new ConnectionFactory(6666));
+            System.out.println("Done!");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error creating connection manager :" + e.getMessage());
         }
-        System.out.println("Gotcha!");
         System.out.println("Starting server");
         connectionGreeter.start();
 
-        System.out.println("To quit press 'Enter'");
+        System.out.println("Press enter to end");
         Scanner s = new Scanner(System.in);
         s.nextLine();
         System.out.println("Ending");
