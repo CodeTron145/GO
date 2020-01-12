@@ -67,7 +67,7 @@ public class GuiManager implements IMessageReceiver {
                 showLoginWindowError();
                 break;
             case "showboard" :
-                showBoard(5);
+                showBoard(Integer.parseInt(message.getValue()));
                 break;
             case "showlogin" :
                 showLoginWindow();

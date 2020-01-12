@@ -2,7 +2,6 @@ package GoGame.GoClient.Client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class ConnectionManager implements IConnectionManager {
 
