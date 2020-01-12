@@ -36,15 +36,20 @@ public class Board extends ReceiverFrame{
         opponentScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
 
         scorePanel.setLayout(new GridLayout(1,2));
+        scorePanel.setBackground(Color.GREEN);
         scorePanel.add(playerScore);
         scorePanel.add(opponentScore);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.GREEN);
 
         JButton passButton = new JButton("Pass");
         JButton resignButton = new JButton("Resign");
-        passButton.setFont(new Font("TimesRoman",Font.PLAIN,16));
-        resignButton.setFont(new Font("TimesRoman",Font.PLAIN,16));
+        passButton.setFont(new Font("TimesRoman",Font.PLAIN,25));
+        resignButton.setFont(new Font("TimesRoman",Font.PLAIN,25));
+
+        buttonPanel.add(passButton);
+        buttonPanel.add(resignButton);
 
         add(scorePanel,BorderLayout.NORTH);
         add(boardPanel,BorderLayout.CENTER);
@@ -91,6 +96,10 @@ public class Board extends ReceiverFrame{
             }
         }
         repaint();
+    }
+
+    public void onTileSelected(int x, int y){
+        guiManager.sendMessage(new Message("tileselected", x+","+y));
     }
 
     @Override
