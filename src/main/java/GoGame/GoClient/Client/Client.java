@@ -45,7 +45,7 @@ public class Client implements IMessageReceiver {
             try {
                 connectionManager.disconnect();
                 connectionManager = null;
-                messageReceiver.receive(new Message("showlogin", ""));
+                messageReceiver.receive(new Message("showloginerror", ""));
             } catch (IOException e) {
                 System.out.println("Error closing the socket");
             }

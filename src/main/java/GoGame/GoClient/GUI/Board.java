@@ -9,12 +9,15 @@ import java.util.Iterator;
 
 public class Board extends ReceiverFrame{
 
-    private final BoardPanel boardPanel = new BoardPanel(this);
+    private final BoardPanel boardPanel;
     private final GuiManager guiManager;
+    private JLabel playerScore;
+    private JLabel opponentScore;
 
-    public Board (GuiManager guiManager) {
+    public Board (GuiManager guiManager, int sizeFromMessage) {
 
         this.guiManager = guiManager;
+        boardPanel = new BoardPanel(this, sizeFromMessage);
 
         setSize(800,900);
         setLayout(new BorderLayout());
@@ -26,20 +29,43 @@ public class Board extends ReceiverFrame{
 
         JPanel scorePanel = new JPanel();
 
-        JLabel playerScore = new JLabel("Your Score: 0",SwingConstants.CENTER);
-        JLabel opponentScore = new JLabel("Opponent's Score: 0",SwingConstants.CENTER);
+        playerScore = new JLabel("Your Score: 0",SwingConstants.CENTER);
+        opponentScore = new JLabel("Opponent's Score: 0",SwingConstants.CENTER);
         playerScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
         opponentScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
 
         scorePanel.setLayout(new GridLayout(1,2));
+        scorePanel.setBackground(Color.GREEN);
         scorePanel.add(playerScore);
         scorePanel.add(opponentScore);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setSize(800,50);
+        buttonPanel.setBackground(Color.GREEN);
+
+        JButton passButton = new JButton("Pass");
+        JButton resignButton = new JButton("Resign");
+        passButton.setFont(new Font("TimesRoman",Font.PLAIN,25));
+        resignButton.setFont(new Font("TimesRoman",Font.PLAIN,25));
+
+        buttonPanel.add(passButton);
+        buttonPanel.add(resignButton);
 
         add(scorePanel,BorderLayout.NORTH);
         add(boardPanel,BorderLayout.CENTER);
         add(buttonPanel,BorderLayout.SOUTH);
+
+        passButton.addActionListener(actionEvent -> {
+                System.out.println("Pass clicked...");
+                System.out.println(guiManager);
+                guiManager.sendMessage(new Message("pass", ""));
+        });
+
+        resignButton.addActionListener(actionEvent -> {
+                System.out.println("Resign clicked...");
+                System.out.println(guiManager);
+                guiManager.sendMessage(new Message("abortgame", ""));
+        });
     }
 
     private synchronized void setBlackPawn(int x, int y){
@@ -68,8 +94,45 @@ public class Board extends ReceiverFrame{
         repaint();
     }
 
+    public void onTileSelected(int x, int y){
+        guiManager.sendMessage(new Message("tileselected", x+","+y));
+    }
+
     @Override
     public void receive(Message message) {
 
+
+        switch (message.getHeader()) {
+            case "setwhitepawn": {
+                int x = Integer.parseInt(message.getValue().split(",")[0]);
+                int y = Integer.parseInt(message.getValue().split(",")[1]);
+                setWhitePawn(x, y);
+                break;
+            }
+            case "setblackpawn": {
+                int x = Integer.parseInt(message.getValue().split(",")[0]);
+                int y = Integer.parseInt(message.getValue().split(",")[1]);
+                setBlackPawn(x, y);
+                break;
+            }
+            case "deletepawn": {
+                int x = Integer.parseInt(message.getValue().split(",")[0]);
+                int y = Integer.parseInt(message.getValue().split(",")[1]);
+                clearPawn(x, y);
+                break;
+            }
+            //case "opponentinfo":
+                //opponentInfo.setText("<html>You are playing vs <br>" + message.getValue() + "</html>");
+                //break;
+            //case "colorinfo":
+                //colorInfo.setText("<html>You are playing as <br>" + message.getValue() + "</html>");
+                //break;
+            case "yourscore":
+                playerScore.setText("Your score: " + message.getValue());
+                break;
+            case "opponentsscore":
+                opponentScore.setText("Opponent's score: " + message.getValue());
+                break;
+        }
     }
 }

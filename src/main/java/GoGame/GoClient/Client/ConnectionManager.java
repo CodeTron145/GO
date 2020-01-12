@@ -23,7 +23,6 @@ public class ConnectionManager implements IConnectionManager {
 
     private class Listener extends Thread {
 
-        final boolean exitFlag = false;
         final IMessageReceiver receiver;
 
         private Listener(IMessageReceiver receiver) {
@@ -32,7 +31,7 @@ public class ConnectionManager implements IConnectionManager {
 
         @Override
         public void run(){
-            while(!exitFlag){
+            while(true){
                 try {
                     String line = bufferedReader.readLine();
                     if (line == null) {
@@ -51,7 +50,7 @@ public class ConnectionManager implements IConnectionManager {
                 }
                 catch (IOException e) {
                     System.out.println("Error 53 9792 " + e.getMessage() + "\n\n" + Arrays.toString(e.getStackTrace()));
-                    receiver.receive(new Message("showlogin", ""));
+                    receiver.receive(new Message("showloginerror", ""));
                 }
             }
         }
