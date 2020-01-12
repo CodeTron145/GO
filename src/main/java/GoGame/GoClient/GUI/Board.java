@@ -5,8 +5,6 @@ import GoGame.GoClient.GuiManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 public class Board extends ReceiverFrame{
@@ -64,20 +62,16 @@ public class Board extends ReceiverFrame{
         add(boardPanel,BorderLayout.CENTER);
         add(buttonPanel,BorderLayout.SOUTH);
 
-        passButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        passButton.addActionListener(actionEvent -> {
                 System.out.println("Pass clicked...");
                 System.out.println(guiManager);
                 guiManager.sendMessage(new Message("pass", ""));
-            }
         });
 
-        resignButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        resignButton.addActionListener(actionEvent -> {
                 System.out.println("Resign clicked...");
                 System.out.println(guiManager);
                 guiManager.sendMessage(new Message("abortgame", ""));
-            }
         });
     }
 

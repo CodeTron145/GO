@@ -13,7 +13,7 @@ public class Lobby extends ReceiverFrame {
 
     private final List players = new List();
     private final List games = new List();
-    private final ArrayList<String> gamesUUID = new ArrayList();
+    private final ArrayList<String> gamesUUID = new ArrayList<>();
 
     public Lobby (GuiManager guiManager) {
 
@@ -31,31 +31,25 @@ public class Lobby extends ReceiverFrame {
         JButton joinButton = new JButton("Join selected game");
         JButton createNewGameButton = new JButton("Create new game");
         JButton createNewGameWithBotButton = new JButton("Create game with bot");
-        JComboBox sizeComboBox = new JComboBox(size);
+        JComboBox<String> sizeComboBox = new JComboBox<>(size);
 
-        joinButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        joinButton.addActionListener(actionEvent -> {
                     //(size[sizeComboBox.getSelectedIndex()]);
                 System.out.println("Join Game clicked...");
                 if (games.getSelectedItem() != null)
                     guiManager.sendMessage(new Message("JoinGame", gamesUUID.get(games.getSelectedIndex())));
-            }
         });
 
-        createNewGameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        createNewGameButton.addActionListener(actionEvent -> {
                 System.out.println("CreateNewGame clicked...");
                 System.out.println(guiManager);
                 guiManager.sendMessage(new Message("createGame", ""));
-            }
         });
 
-        createNewGameWithBotButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
+        createNewGameWithBotButton.addActionListener(actionEvent ->{
                 System.out.println("CreateNewGameWithBot clicked...");
                 System.out.println(guiManager);
                 guiManager.sendMessage(new Message("createGameWithBot", ""));
-            }
         });
 
         joinButton.setFont(new Font("TimesRoman",Font.PLAIN,20));

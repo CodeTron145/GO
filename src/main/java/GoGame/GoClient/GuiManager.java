@@ -47,6 +47,7 @@ public class GuiManager implements IMessageReceiver {
 
     @Override
     public void receive(Message message) {
+
         if(message == null){
             client.disconnect();
             showLoginWindow();
@@ -54,22 +55,26 @@ public class GuiManager implements IMessageReceiver {
             return;
         }
 
-        if(message.getHeader().equals("showlobby")){
-            showLobby();
+        switch (message.getHeader()) {
+
+            case "showlobby" :
+                showLobby();
+                break;
+            case "showboard" :
+                showBoard(5);
+                break;
+            case "showlogin" :
+                showLoginWindow();
+                break;
+            default:
+                viewFrameReceiver.receive(message);
+                break;
         }
-        else if(message.getHeader().equals("showboard")){
-            showBoard(5);
-        }
-        else if(message.getHeader().equals("showlogin")){
-            showLoginWindow();
-        }
+
 //        else if(message.getHeader().toLowerCase().equals("info") ||
 //                message.getHeader().toLowerCase().equals("invalidmoveinfo") ){
 //            JOptionPane.showMessageDialog(viewFrameReceiver, message.getValue());
 //        }
-        else{
-            viewFrameReceiver.receive(message);
-        }
     }
 
     public void sendMessage(Message message){
