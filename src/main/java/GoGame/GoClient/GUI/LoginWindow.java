@@ -68,6 +68,7 @@ public class LoginWindow extends ReceiverFrame {
 
     @Override
     public void receive(Message message) {
+
         //empty message
     }
 }

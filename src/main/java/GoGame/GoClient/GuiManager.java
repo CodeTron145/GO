@@ -67,7 +67,7 @@ public class GuiManager implements IMessageReceiver {
                 showLoginWindowError();
                 break;
             case "showboard" :
-                showBoard(19);
+                showBoard(Integer.parseInt(message.getValue()));
                 break;
             case "showlogin" :
                 showLoginWindow();
@@ -92,7 +92,7 @@ public class GuiManager implements IMessageReceiver {
     }
 
     public void connect(String ip, int port){
-        client.setMessageReceiver(this);
+        client.setMessageReceiver (this);
         client.connect(ip, port);
     }
 }

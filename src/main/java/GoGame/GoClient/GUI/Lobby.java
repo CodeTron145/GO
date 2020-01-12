@@ -5,8 +5,6 @@ import GoGame.GoClient.GuiManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Lobby extends ReceiverFrame {
@@ -34,7 +32,6 @@ public class Lobby extends ReceiverFrame {
         JComboBox<String> sizeComboBox = new JComboBox<>(size);
 
         joinButton.addActionListener(actionEvent -> {
-                    //(size[sizeComboBox.getSelectedIndex()]);
                 System.out.println("Join Game clicked...");
                 if (games.getSelectedItem() != null)
                     guiManager.sendMessage(new Message("JoinGame", gamesUUID.get(games.getSelectedIndex())));
@@ -43,13 +40,13 @@ public class Lobby extends ReceiverFrame {
         createNewGameButton.addActionListener(actionEvent -> {
                 System.out.println("CreateNewGame clicked...");
                 System.out.println(guiManager);
-                guiManager.sendMessage(new Message("createGame", ""));
+                guiManager.sendMessage(new Message("createGame", (size[sizeComboBox.getSelectedIndex()])));
         });
 
         createNewGameWithBotButton.addActionListener(actionEvent ->{
                 System.out.println("CreateNewGameWithBot clicked...");
                 System.out.println(guiManager);
-                guiManager.sendMessage(new Message("createGameWithBot", ""));
+                guiManager.sendMessage(new Message("createGameWithBot", (size[sizeComboBox.getSelectedIndex()])));
         });
 
         joinButton.setFont(new Font("TimesRoman",Font.PLAIN,20));

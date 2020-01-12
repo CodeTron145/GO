@@ -95,12 +95,12 @@ public class Board extends ReceiverFrame{
     }
 
     public void onTileSelected(int x, int y){
+
         guiManager.sendMessage(new Message("tileselected", x+","+y));
     }
 
     @Override
     public void receive(Message message) {
-
 
         switch (message.getHeader()) {
             case "setwhitepawn": {

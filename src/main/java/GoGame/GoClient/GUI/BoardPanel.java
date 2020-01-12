@@ -64,13 +64,13 @@ public class BoardPanel extends JPanel {
             Pawn p = pawns.get(i);
             if(p.getColor() == Color.BLACK){
                 g2.setColor(Color.BLACK);
-                g2.fillOval(p.getX()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),p.getY()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),
-                        TILE_SIZE/2,TILE_SIZE/2);
+                g2.fillOval(p.getX()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/2),p.getY()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/2),
+                        TILE_SIZE,TILE_SIZE);
             }
             else if(p.getColor() == Color.WHITE){
                 g2.setColor(Color.WHITE);
-                g2.fillOval(p.getX()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),p.getY()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),
-                        TILE_SIZE/2,TILE_SIZE/2);
+                g2.fillOval(p.getX()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/2),p.getY()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/2),
+                        TILE_SIZE,TILE_SIZE);
             }
         }
     }
