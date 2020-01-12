@@ -38,7 +38,34 @@ public class BoardPanel extends JPanel {
     @Override
     protected synchronized void paintComponent(Graphics g) {
 
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
 
+        g2.setColor(Color.BLACK);
+        // Draw rows.
+        for (int i = 0; i < SIZE; i++) {
+            g2.drawLine(TILE_SIZE, i * TILE_SIZE + TILE_SIZE, TILE_SIZE
+                    * N_OF_TILES + TILE_SIZE, i * TILE_SIZE + TILE_SIZE);
+        }
+        // Draw columns.
+        for (int i = 0; i < SIZE; i++) {
+            g2.drawLine(i * TILE_SIZE + TILE_SIZE, TILE_SIZE, i * TILE_SIZE
+                    + TILE_SIZE, TILE_SIZE * N_OF_TILES + TILE_SIZE);
+        }
+
+        for (int i = 0; i < pawns.size(); i++) {
+            Pawn p = pawns.get(i);
+            if(p.getColor() == Color.BLACK){
+                g2.setColor(Color.BLACK);
+                g2.fillOval(p.getX()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),p.getY()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),
+                        TILE_SIZE/2,TILE_SIZE/2);
+            }
+            else if(p.getColor() == Color.WHITE){
+                g2.setColor(Color.WHITE);
+                g2.fillOval(p.getX()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),p.getY()*TILE_SIZE+TILE_SIZE-(TILE_SIZE/4),
+                        TILE_SIZE/2,TILE_SIZE/2);
+            }
+        }
     }
 
     private boolean checkPoint(int x, int y){
