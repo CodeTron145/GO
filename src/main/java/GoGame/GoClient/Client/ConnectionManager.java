@@ -26,6 +26,7 @@ public class ConnectionManager implements IConnectionManager {
         final IMessageReceiver receiver;
 
         private Listener(IMessageReceiver receiver) {
+
             this.receiver = receiver;
         }
 
@@ -49,7 +50,7 @@ public class ConnectionManager implements IConnectionManager {
                     receiver.receive(message);
                 }
                 catch (IOException e) {
-                    System.out.println("Error 53 9792 " + e.getMessage() + "\n\n" + Arrays.toString(e.getStackTrace()));
+                    System.out.println("Read error");
                     receiver.receive(new Message("showloginerror", ""));
                 }
             }

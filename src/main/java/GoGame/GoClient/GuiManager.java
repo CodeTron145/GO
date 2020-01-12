@@ -92,7 +92,7 @@ public class GuiManager implements IMessageReceiver {
     }
 
     public void connect(String ip, int port){
-        client.setMessageReceiver(this);
+        client.setMessageReceiver (this);
         client.connect(ip, port);
     }
 }
