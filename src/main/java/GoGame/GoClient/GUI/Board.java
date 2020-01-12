@@ -5,6 +5,8 @@ import GoGame.GoClient.GuiManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 public class Board extends ReceiverFrame{
@@ -37,9 +39,30 @@ public class Board extends ReceiverFrame{
 
         JPanel buttonPanel = new JPanel();
 
+        JButton passButton = new JButton("Pass");
+        JButton resignButton = new JButton("Resign");
+        passButton.setFont(new Font("TimesRoman",Font.PLAIN,16));
+        resignButton.setFont(new Font("TimesRoman",Font.PLAIN,16));
+
         add(scorePanel,BorderLayout.NORTH);
         add(boardPanel,BorderLayout.CENTER);
         add(buttonPanel,BorderLayout.SOUTH);
+
+        passButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("Pass clicked...");
+                System.out.println(guiManager);
+                guiManager.sendMessage(new Message("pass", ""));
+            }
+        });
+
+        resignButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("Resign clicked...");
+                System.out.println(guiManager);
+                guiManager.sendMessage(new Message("abortgame", ""));
+            }
+        });
     }
 
     private synchronized void setBlackPawn(int x, int y){
