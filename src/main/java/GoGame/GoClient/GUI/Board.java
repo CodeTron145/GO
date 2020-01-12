@@ -13,6 +13,8 @@ public class Board extends ReceiverFrame{
 
     private final BoardPanel boardPanel = new BoardPanel(this);
     private final GuiManager guiManager;
+    private JLabel playerScore;
+    private JLabel opponentScore;
 
     public Board (GuiManager guiManager) {
 
@@ -28,8 +30,8 @@ public class Board extends ReceiverFrame{
 
         JPanel scorePanel = new JPanel();
 
-        JLabel playerScore = new JLabel("Your Score: 0",SwingConstants.CENTER);
-        JLabel opponentScore = new JLabel("Opponent's Score: 0",SwingConstants.CENTER);
+        playerScore = new JLabel("Your Score: 0",SwingConstants.CENTER);
+        opponentScore = new JLabel("Opponent's Score: 0",SwingConstants.CENTER);
         playerScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
         opponentScore.setFont(new Font("TimesRoman",Font.PLAIN,16));
 
@@ -94,5 +96,38 @@ public class Board extends ReceiverFrame{
     @Override
     public void receive(Message message) {
 
+
+        switch (message.getHeader()) {
+            case "setwhitepawn": {
+                int x = Integer.parseInt(message.getValue().split(",")[0]);
+                int y = Integer.parseInt(message.getValue().split(",")[1]);
+                setWhitePawn(x, y);
+                break;
+            }
+            case "setblackpawn": {
+                int x = Integer.parseInt(message.getValue().split(",")[0]);
+                int y = Integer.parseInt(message.getValue().split(",")[1]);
+                setBlackPawn(x, y);
+                break;
+            }
+            case "deletepawn": {
+                int x = Integer.parseInt(message.getValue().split(",")[0]);
+                int y = Integer.parseInt(message.getValue().split(",")[1]);
+                clearPawn(x, y);
+                break;
+            }
+            //case "opponentinfo":
+                //opponentInfo.setText("<html>You are playing vs <br>" + message.getValue() + "</html>");
+                //break;
+            //case "colorinfo":
+                //colorInfo.setText("<html>You are playing as <br>" + message.getValue() + "</html>");
+                //break;
+            case "yourscore":
+                playerScore.setText("Your score: " + message.getValue());
+                break;
+            case "opponentsscore":
+                opponentScore.setText("Opponent's score: " + message.getValue());
+                break;
+        }
     }
 }
