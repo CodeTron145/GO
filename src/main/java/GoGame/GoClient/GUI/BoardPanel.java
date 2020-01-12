@@ -7,13 +7,20 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static GoGame.GoClient.GUI.Board.*;
-
 public class BoardPanel extends JPanel {
+
+    public static int SIZE;
+    public static int N_OF_TILES;
+    public static int TILE_SIZE;
 
     private final List<Pawn> pawns = new ArrayList<>();
 
-    public BoardPanel (Board board) {
+    public BoardPanel (Board board, int sizeFromMessage) {
+
+        SIZE = sizeFromMessage;
+        N_OF_TILES = SIZE - 1;
+        TILE_SIZE = 800 / (SIZE + 1);
+
         setPreferredSize(new Dimension(800, 800));
         setBackground(Color.ORANGE);
         setLayout( new GridLayout(N_OF_TILES, N_OF_TILES));

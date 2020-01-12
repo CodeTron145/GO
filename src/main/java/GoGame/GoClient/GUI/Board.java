@@ -9,22 +9,15 @@ import java.util.Iterator;
 
 public class Board extends ReceiverFrame{
 
-    public static int SIZE;
-    public static int N_OF_TILES;
-    public static int TILE_SIZE;
-
-    private final BoardPanel boardPanel = new BoardPanel(this);
+    private final BoardPanel boardPanel;
     private final GuiManager guiManager;
     private JLabel playerScore;
     private JLabel opponentScore;
 
-    public Board (GuiManager guiManager, int size) {
+    public Board (GuiManager guiManager, int sizeFromMessage) {
 
         this.guiManager = guiManager;
-
-        SIZE = size;
-        N_OF_TILES = SIZE - 1;
-        TILE_SIZE = 800 / (SIZE + 1);
+        boardPanel = new BoardPanel(this, sizeFromMessage);
 
         setSize(800,900);
         setLayout(new BorderLayout());

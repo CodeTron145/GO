@@ -21,12 +21,12 @@ public class GuiManager implements IMessageReceiver {
         showLoginWindow();
     }
 
-    private void showBoard(int size) {
+    private void showBoard(int sizeFromMessage) {
 
         if(viewFrameReceiver != null){
             viewFrameReceiver.dispose();
         }
-        viewFrameReceiver = new Board(this, size);
+        viewFrameReceiver = new Board(this, sizeFromMessage);
     }
 
     private void showLoginWindow() {
@@ -35,6 +35,16 @@ public class GuiManager implements IMessageReceiver {
             viewFrameReceiver.dispose();
         }
         viewFrameReceiver = new LoginWindow(this);
+    }
+
+    private void showLoginWindowError() {
+
+        client.disconnect();
+        if(viewFrameReceiver != null){
+            viewFrameReceiver.dispose();
+        }
+        viewFrameReceiver = new LoginWindow(this);
+        JOptionPane.showMessageDialog(viewFrameReceiver, "Connection to the server lost!");
     }
 
     private void showLobby(){
@@ -48,17 +58,13 @@ public class GuiManager implements IMessageReceiver {
     @Override
     public void receive(Message message) {
 
-        if(message == null){
-            client.disconnect();
-            showLoginWindow();
-            //JOptionPane.showMessageDialog(viewFrameReceiver, "Connection to the server lost!");
-            return;
-        }
-
         switch (message.getHeader()) {
 
             case "showlobby" :
                 showLobby();
+                break;
+            case "showloginerror" :
+                showLoginWindowError();
                 break;
             case "showboard" :
                 showBoard(5);
@@ -66,15 +72,16 @@ public class GuiManager implements IMessageReceiver {
             case "showlogin" :
                 showLoginWindow();
                 break;
+            case "info" :
+                JOptionPane.showMessageDialog(viewFrameReceiver, message.getValue());
+                break;
+            case "invalidmoveinfo" :
+                JOptionPane.showMessageDialog(viewFrameReceiver, message.getValue());
+                break;
             default:
                 viewFrameReceiver.receive(message);
                 break;
         }
-
-//        else if(message.getHeader().toLowerCase().equals("info") ||
-//                message.getHeader().toLowerCase().equals("invalidmoveinfo") ){
-//            JOptionPane.showMessageDialog(viewFrameReceiver, message.getValue());
-//        }
     }
 
     public void sendMessage(Message message){
