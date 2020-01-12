@@ -11,14 +11,22 @@ import java.util.Iterator;
 
 public class Board extends ReceiverFrame{
 
+    public static int SIZE;
+    public static int N_OF_TILES;
+    public static int TILE_SIZE;
+
     private final BoardPanel boardPanel = new BoardPanel(this);
     private final GuiManager guiManager;
     private JLabel playerScore;
     private JLabel opponentScore;
 
-    public Board (GuiManager guiManager) {
+    public Board (GuiManager guiManager, int size) {
 
         this.guiManager = guiManager;
+
+        SIZE = size;
+        N_OF_TILES = SIZE - 1;
+        TILE_SIZE = 800 / (SIZE + 1);
 
         setSize(800,900);
         setLayout(new BorderLayout());
@@ -41,6 +49,7 @@ public class Board extends ReceiverFrame{
         scorePanel.add(opponentScore);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setSize(800,50);
         buttonPanel.setBackground(Color.GREEN);
 
         JButton passButton = new JButton("Pass");

@@ -21,12 +21,12 @@ public class GuiManager implements IMessageReceiver {
         showLoginWindow();
     }
 
-    private void showBoard() {
+    private void showBoard(int size) {
 
         if(viewFrameReceiver != null){
             viewFrameReceiver.dispose();
         }
-        viewFrameReceiver = new Board(this);
+        viewFrameReceiver = new Board(this, size);
     }
 
     private void showLoginWindow() {
@@ -58,7 +58,7 @@ public class GuiManager implements IMessageReceiver {
             showLobby();
         }
         else if(message.getHeader().equals("showboard")){
-            showBoard();
+            showBoard(5);
         }
         else if(message.getHeader().equals("showlogin")){
             showLoginWindow();
