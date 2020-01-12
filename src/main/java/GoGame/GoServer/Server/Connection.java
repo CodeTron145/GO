@@ -1,7 +1,5 @@
 package GoGame.GoServer.Server;
 
-import GoGame.GoServer.MessageReceiver;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Arrays;
