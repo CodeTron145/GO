@@ -2,6 +2,6 @@ package GoGame.GoServer;
 
 import GoGame.GoServer.Server.Message;
 
-public interface MessagesReceiver {
+public interface MessageReceiver {
     void receive(Message message);
 }
