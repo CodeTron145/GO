@@ -121,12 +121,6 @@ public class Board extends ReceiverFrame{
                 clearPawn(x, y);
                 break;
             }
-            //case "opponentinfo":
-                //opponentInfo.setText("<html>You are playing vs <br>" + message.getValue() + "</html>");
-                //break;
-            //case "colorinfo":
-                //colorInfo.setText("<html>You are playing as <br>" + message.getValue() + "</html>");
-                //break;
             case "yourscore":
                 playerScore.setText("Your score: " + message.getValue());
                 break;
