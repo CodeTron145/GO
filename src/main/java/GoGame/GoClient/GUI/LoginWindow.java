@@ -35,7 +35,7 @@ public class LoginWindow extends ReceiverFrame {
         hostNameTextField = new TextField(30);
         hostNameTextField.setText("localhost");
         portTextField = new TextField(20);
-        portTextField.setText("6666");
+        portTextField.setText("2020");
 
         hostNameTextField.setFont(new Font("TimesRoman",Font.PLAIN,15));
         portTextField.setFont(new Font("TimesRoman",Font.PLAIN,15));
