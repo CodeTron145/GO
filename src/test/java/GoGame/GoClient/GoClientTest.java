@@ -15,6 +15,8 @@ public class GoClientTest {
 
         Message testMessage = new Message("showlobby","");
         Message testMessage2 = new Message("showlogin","");
+        Message testMessage3 = new Message("showboard","");
+        Message testMessage4 = new Message("showloginerror","");
         ServerSocket testServerSocket = new ServerSocket(6666);
 
         GuiManager testGuiManager = new GuiManager();
@@ -27,7 +29,8 @@ public class GoClientTest {
         testGuiManager.sendMessage(testMessage);
         testGuiManager.receive(testMessage);
         testGuiManager.receive(testMessage2);
-
+        testGuiManager.receive(testMessage3);
+        testGuiManager.receive(testMessage4);
         testServerSocket.close();
     }
 }
